@@ -2,8 +2,10 @@ language: go
 
 before_install:
   - go get -t -v ./...
+  - go install ./vendor/github.com/golangci/golangci-lint/cmd/golangci-lint
 
 script:
+  - golangci-lint run
   - go test ./crypto -race -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
