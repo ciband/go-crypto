@@ -201,7 +201,7 @@ func serializeIpfs(buffer *bytes.Buffer, transaction *Transaction) *bytes.Buffer
 
 func serializeTimelockTransfer(buffer *bytes.Buffer, transaction *Transaction) *bytes.Buffer {
 	_ = binary.Write(buffer, binary.LittleEndian, uint64(transaction.Amount))
-	_ = io.WriteString(buffer, transaction.TimelockType)
+	_, _ = io.WriteString(buffer, transaction.TimelockType)
 	_ = binary.Write(buffer, binary.LittleEndian, uint32(transaction.Timelock))
 	_ = binary.Write(buffer, binary.LittleEndian, Base58Decode(transaction.RecipientId))
 
