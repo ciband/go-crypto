@@ -68,7 +68,7 @@ func TestDecodeCorrupt(t *testing.T) {
         {input: "!!!!", offset: 0},
 		{input: "x===", offset: 1},
 		{input: "x0", offset: 1},
-		{input: "xl", offset: offset: 1},
+		{input: "xl", offset: 1},
 		{input: "xI", offset: 1},
 		{input: "xO", offset: 1},
 	}
