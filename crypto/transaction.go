@@ -22,7 +22,7 @@ import (
 
 func (transaction *Transaction) GetId() string {
 	bytes := sha256.New()
-	bytes.Write(transaction.ToBytes(false, false))
+	_, _ = bytes.Write(transaction.ToBytes(false, false))
 
 	return HexEncode(bytes.Sum(nil))
 }
