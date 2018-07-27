@@ -33,15 +33,15 @@ func serializeHeader(buffer *bytes.Buffer, transaction *Transaction) *bytes.Buff
 	binary.Write(buffer, binary.LittleEndian, HexDecode("ff")[0])
 
 	if transaction.Version == 0 {
-		binary.Write(buffer, binary.LittleEndian, GetNetwork().Version)
+		_ = binary.Write(buffer, binary.LittleEndian, GetNetwork().Version)
 	} else {
-		binary.Write(buffer, binary.LittleEndian, transaction.Version)
+		_ = binary.Write(buffer, binary.LittleEndian, transaction.Version)
 	}
 
 	if transaction.Network == 0 {
-		binary.Write(buffer, binary.LittleEndian, HexDecode("01")[0])
+		_ = binary.Write(buffer, binary.LittleEndian, HexDecode("01")[0])
 	} else {
-		binary.Write(buffer, binary.LittleEndian, transaction.Network)
+		_ = binary.Write(buffer, binary.LittleEndian, transaction.Network)
 	}
 
 	binary.Write(buffer, binary.LittleEndian, transaction.Type)
