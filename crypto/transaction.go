@@ -32,7 +32,7 @@ func (transaction *Transaction) Sign(passphrase string) {
 
 	transaction.SenderPublicKey = HexEncode(privateKey.PublicKey.Serialize())
 	bytes := sha256.New()
-	_ = bytes.Write(transaction.ToBytes(true, true))
+	_, _ = bytes.Write(transaction.ToBytes(true, true))
 
 	signature, err := privateKey.Sign(bytes.Sum(nil))
 	if err == nil {
@@ -44,7 +44,7 @@ func (transaction *Transaction) SecondSign(passphrase string) {
 	privateKey, _ := PrivateKeyFromPassphrase(passphrase)
 
 	bytes := sha256.New()
-	_ = bytes.Write(transaction.ToBytes(false, true))
+	_, _ = bytes.Write(transaction.ToBytes(false, true))
 
 	signature, err := privateKey.Sign(bytes.Sum(nil))
 	if err == nil {
@@ -60,7 +60,7 @@ func (transaction *Transaction) Verify() (bool, error) {
 	}
 
 	bytes := sha256.New()
-	_ = bytes.Write(transaction.ToBytes(true, true))
+	_, _ = bytes.Write(transaction.ToBytes(true, true))
 
 	return publicKey.Verify(HexDecode(transaction.Signature), bytes.Sum(nil))
 
@@ -68,7 +68,7 @@ func (transaction *Transaction) Verify() (bool, error) {
 
 func (transaction *Transaction) SecondVerify(secondPublicKey *PublicKey) (bool, error) {
 	bytes := sha256.New()
-	_ = bytes.Write(transaction.ToBytes(false, true))
+	_, _ = bytes.Write(transaction.ToBytes(false, true))
 
 	return secondPublicKey.Verify(HexDecode(transaction.SignSignature), bytes.Sum(nil))
 }
